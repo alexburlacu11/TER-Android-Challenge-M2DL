@@ -1,4 +1,8 @@
-package org.ups.ter.morsecode;
+package org.ups.ter.morsecode.activities;
+
+import org.ups.ter.morsecode.R;
+import org.ups.ter.morsecode.R.layout;
+import org.ups.ter.morsecode.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
