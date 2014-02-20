@@ -19,7 +19,7 @@ public class ShortMessageManager {
 
 	
 	// Temp sequence for testing
-	Static.Morse[] sequence = { Static.Morse.SHORT, Static.Morse.EMPTY, Static.Morse.LONG, Static.Morse.SHORT };
+	Static.Morse[] sequence = { Static.Morse.SHORT, Static.Morse.WORD_END, Static.Morse.LONG, Static.Morse.SHORT };
 
 		
 	public ShortMessageManager(Context context) {
@@ -54,7 +54,7 @@ public class ShortMessageManager {
 	protected void nextSign(int i) {
 		if (i < sequence.length) {
 			switch (sequence[i]) {
-			case EMPTY:
+			case WORD_END:
 				toggleSpace();
 				break;
 			case SHORT:

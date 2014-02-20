@@ -20,6 +20,12 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.sensor.light" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -38,7 +44,34 @@
             android:name="org.ups.ter.morsecode.activities.LightChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>
-        
+        <activity
+            android:name="org.ups.ter.morsecode.activities.CaptureLightActivity"
+            android:label="@string/title_activity_capture_light" >
+        </activity>
+        <activity
+            android:name="org.ups.ter.morsecode.activities.MorseCamReaderActivity"
+            android:label="@string/title_activity_morse_cam_reader" >
+        </activity>
+        <activity
+            android:name="org.ups.ter.morsecode.activities.LightSensorActivity"
+            android:label="@string/title_activity_light_sensor" >
+        </activity>
+        <activity
+            android:name="org.ups.ter.morsecode.activities.SoundActivity"
+            android:label="@string/title_activity_sound" >
+        </activity>
+        <activity
+            android:name="org.ups.ter.morsecode.activities.SendMorseActivity"
+            android:label="@string/title_activity_send_morse" >
+        </activity>
+        <activity
+            android:name="org.ups.ter.morsecode.MorseCode"
+            android:label="@string/title_activity_morse_code" >
+        </activity>
+        <activity
+            android:name="org.ups.ter.morsecode.activities.SoundConverter"
+            android:label="@string/title_activity_sound_converter" >
+        </activity>
     </application>
 
 </manifest>

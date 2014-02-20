@@ -14,9 +14,9 @@ public class ChatMessage {
 	@Override
 	public String toString() {
 		if(sentByMe)
-			return "Moi : " + data;
+			return "Me : " + data;
 		else
-			return "Correspondant : " + data;
+			return "Friend : " + data;
 	}
 	
 }

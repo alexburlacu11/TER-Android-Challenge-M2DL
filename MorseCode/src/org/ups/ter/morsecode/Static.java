@@ -1,13 +1,15 @@
-
 package org.ups.ter.morsecode;
 
-public class Static {
+
+public class Static{
 	
 	public enum SendMode {
 		Sound, Light, SMS
 	}
 
 	public enum Morse {
-		 LONG, SHORT, EMPTY
+
+		 LONG, SHORT, WORD_END, LETTER_END
 	}
 }
+

@@ -1,7 +1,11 @@
 package org.ups.ter.morsecode.morseconverter;
 
+import java.util.ArrayList;
+
+import org.ups.ter.morsecode.Coder;
 import org.ups.ter.morsecode.Constants;
 import org.ups.ter.morsecode.Static;
+import org.ups.ter.morsecode.Static.Morse;
 
 import android.content.Context;
 import android.hardware.Camera;
@@ -14,22 +18,21 @@ public class LightManager {
 
 	Camera cam;
 	Handler handler;
-	
+	private Coder coder;
+
 	boolean isCameraActive = false;
 	int currentLight = 0;
 
-	
-	// Temp sequence for testing
-	Static.Morse[] lights = { Static.Morse.LONG, Static.Morse.LONG, Static.Morse.SHORT, Static.Morse.LONG, Static.Morse.EMPTY, Static.Morse.SHORT };
-	
+	ArrayList<Morse> sequence;
 
 	public LightManager(Context context) {
 		this.context = context;
 		this.handler = new Handler();
+		this.coder = new Coder();
 	}
 
 	public void sendLight(String data) {
-		// lights = data ...
+		sequence = coder.encrypt(data);
 		
 		currentLight = 0;
 		nextLight(currentLight);
@@ -62,15 +65,18 @@ public class LightManager {
 		handler.postDelayed(lighsOffRunnable, Constants.DASH_TIME);
 	}
 	
-	protected void toggleSpace() {
-		handler.postDelayed(lighsOffRunnable, Constants.SPACE_TIME);
+	protected void toggleSpace(int duration) {
+		handler.postDelayed(lighsOffRunnable, duration);
 	}
 
 	protected void nextLight(int i) {
-		if (i < lights.length) {
-			switch (lights[i]) {
-			case EMPTY:
-				toggleSpace();
+		if (i < sequence.size()) {
+			switch (sequence.get(i)) {
+			case WORD_END:
+				toggleSpace(Constants.SPACE_TIME);
+				break;
+			case LETTER_END:
+				toggleSpace(Constants.BETWEEN_LETTERS_TIME);
 				break;
 			case SHORT:
 				toggleShortLight();

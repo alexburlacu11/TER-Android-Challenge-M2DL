@@ -21,5 +21,17 @@ public class MainActivity extends Activity {
 	public void startLightChat(View v) {
 		startActivity(new Intent(MainActivity.this, LightChatActivity.class));
 	}
+	
+	public void toCamera(View v){
+		Intent intent = new Intent(getApplicationContext(),
+				LightSensorActivity.class);
+		startActivity(intent);
+	}
+	
+	public void toSound(View v){
+		Intent intent = new Intent(getApplicationContext(),
+				SoundActivity.class);
+		startActivity(intent);
+	}
 
 }
