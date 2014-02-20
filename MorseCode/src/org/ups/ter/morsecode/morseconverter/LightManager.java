@@ -1,17 +1,16 @@
 package org.ups.ter.morsecode.morseconverter;
 
+import org.ups.ter.morsecode.Constants;
 import org.ups.ter.morsecode.Static;
 
+import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Handler;
 
 public class LightManager {
 
-	private static int DOT_TIME = 200;
-	private static int DASH_TIME = 3 * DOT_TIME;
-	private static int BETWEEN_LETTERS_TIME = 3 * DOT_TIME;
-	private static int SPACE_TIME = 7 * DOT_TIME;
+	private Context context;
 
 	Camera cam;
 	Handler handler;
@@ -25,11 +24,14 @@ public class LightManager {
 	
 	
 
-	public LightManager() {
-		handler = new Handler();
+	public LightManager(Context context) {
+		this.context = context;
+		this.handler = new Handler();
 	}
 
-	public void sendLight() {
+	public void sendLight(String data) {
+		// lights = data ...
+		
 		currentLight = 0;
 		nextLight(currentLight);
 	}
@@ -53,16 +55,16 @@ public class LightManager {
 
 	protected void toggleShortLight() {
 		ledOn();
-		handler.postDelayed(lighsOffRunnable, DOT_TIME);
+		handler.postDelayed(lighsOffRunnable, Constants.DOT_TIME);
 	}
 
 	protected void toggleLongLight() {
 		ledOn();
-		handler.postDelayed(lighsOffRunnable, DASH_TIME);
+		handler.postDelayed(lighsOffRunnable, Constants.DASH_TIME);
 	}
 	
 	protected void toggleSpace() {
-		handler.postDelayed(lighsOffRunnable, SPACE_TIME);
+		handler.postDelayed(lighsOffRunnable, Constants.SPACE_TIME);
 	}
 
 	protected void nextLight(int i) {
@@ -88,7 +90,7 @@ public class LightManager {
 		public void run() {
 			ledOff();
 			// Delay between 2 elements = dot time
-			handler.postDelayed(nextLightRunnable, DOT_TIME);
+			handler.postDelayed(nextLightRunnable, Constants.DOT_TIME);
 		}
 	};
 	
