@@ -8,6 +8,7 @@ public class Static{
 	}
 
 	public enum Morse {
+
 		 LONG, SHORT, WORD_END, LETTER_END
 	}
 }
