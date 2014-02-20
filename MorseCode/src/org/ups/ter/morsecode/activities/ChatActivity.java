@@ -1,7 +1,7 @@
 package org.ups.ter.morsecode.activities;
 
 import org.ups.ter.morsecode.R;
-import org.ups.ter.morsecode.SendMode;
+import org.ups.ter.morsecode.Static;
 import org.ups.ter.morsecode.R.layout;
 import org.ups.ter.morsecode.morseconverter.MorseConverter;
 
@@ -12,7 +12,7 @@ import android.view.View;
 
 public class ChatActivity extends Activity {
 
-	SendMode sendMode;
+	Static.SendMode sendMode;
 	MorseConverter morseConverter;
 	
 	@Override
