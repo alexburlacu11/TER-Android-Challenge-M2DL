@@ -3,6 +3,7 @@ package org.ups.ter.morsecode.activities;
 import org.ups.ter.morsecode.R;
 import org.ups.ter.morsecode.SendMode;
 import org.ups.ter.morsecode.R.layout;
+import org.ups.ter.morsecode.morseconverter.LightManager;
 import org.ups.ter.morsecode.morseconverter.MorseConverter;
 
 import android.os.Bundle;
@@ -22,25 +23,35 @@ public class ChatActivity extends Activity {
 		// set sendMode according to previous menu choice
 		
 		setContentView(R.layout.activity_chat);
+		
+		init();
 	}
 	
 	
+	private void init() {
+		morseConverter = new MorseConverter();
+	}
+
+
 	public void sendClicked(View v) {
 		
-		switch(sendMode) {
-		case Sound:
-			break;
-		case Light:
-			break;
-		case SMS:
-			break;
-		default:
-			break;
-		}
+		morseConverter.sendLight();
+
+//		switch(sendMode) {
+//		case Sound:
+//			break;
+//		case Light:
+//			break;
+//		case SMS:
+//			break;
+//		default:
+//			break;
+//		}
 		
 		// Send !
 		// morseConverter.sendSound(xxxxx) 
 		// ...
+		
 	}
 
 }
