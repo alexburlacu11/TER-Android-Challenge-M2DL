@@ -45,6 +45,10 @@
             android:label="@string/title_activity_chat" >
         </activity>
         <activity
+            android:name="org.ups.ter.morsecode.activities.SMSChatActivity"
+            android:label="@string/title_activity_chat" >
+        </activity>
+        <activity
             android:name="org.ups.ter.morsecode.activities.CaptureLightActivity"
             android:label="@string/title_activity_capture_light" >
         </activity>

@@ -22,6 +22,10 @@ public class MainActivity extends Activity {
 		startActivity(new Intent(MainActivity.this, LightChatActivity.class));
 	}
 	
+	public void startTextVibrator(View v) {
+		startActivity(new Intent(MainActivity.this, SMSChatActivity.class));
+	}
+	
 	public void toCamera(View v){
 		Intent intent = new Intent(getApplicationContext(),
 				LightSensorActivity.class);

@@ -28,20 +28,21 @@ public class Coder {
 		ArrayList<Morse> letter = new ArrayList<Morse>();
 		String s = "";
 		
-		Iterator<Morse> it = letter.iterator();
-		while(it.hasNext())
-		{
-			Morse element = it.next();
-			if (element != Morse.WORD_END) {
-				letter.add(element);
-			} else {
+		for(Morse m : input) {
+			switch(m) {
+			case WORD_END:
 				s += " ";
+				break;
+			case LETTER_END:
+				s += morseToChar.get(letter);
+				letter.clear();
+				break;
+			default:
+				letter.add(m);
+				break;
 			}
-		    if (element == Morse.LETTER_END){
-		    	s += morseToChar.get(element);
-		    	letter.clear();
-		    } 
 		}
+		
 		return s;
 	}
 	

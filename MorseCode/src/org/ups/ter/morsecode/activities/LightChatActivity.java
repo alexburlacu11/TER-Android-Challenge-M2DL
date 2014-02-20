@@ -28,7 +28,7 @@ import android.widget.ListView;
 // Activity used to send / receive light messages
 public class LightChatActivity extends Activity implements SensorEventListener {
 
-	private static final float THRESHOLD = +1000f;
+	private static final float THRESHOLD = +600f;
 	private static final int END_LINE_TIME = +1300;
 	private static final int END_WORD_TIME = +400;
 	private static final int LIMIT_TIME = +400;
@@ -41,7 +41,7 @@ public class LightChatActivity extends Activity implements SensorEventListener {
 	private long lastEventTime = Calendar.getInstance().getTimeInMillis();
 	private boolean isLampOn = false;
 	private boolean firstTime = true;
-	private ArrayList<Morse> receivedMesssage = new ArrayList<Morse>();
+	private ArrayList<Morse> receivedMessage = new ArrayList<Morse>();
 
 
 	ArrayAdapter<ChatMessage> adapter;
@@ -89,7 +89,7 @@ public class LightChatActivity extends Activity implements SensorEventListener {
 
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		if (sensor.getType() == Sensor.TYPE_LIGHT) {
-			System.out.println("Sensor Changed Accuracy :" + accuracy);
+			// System.out.println("Sensor Changed Accuracy :" + accuracy);
 		}
 	}
 
@@ -108,9 +108,9 @@ public class LightChatActivity extends Activity implements SensorEventListener {
 		if (lastValue < THRESHOLD && value > THRESHOLD) {
 
 			if (deltaTime >= END_LINE_TIME && !isLampOn && !firstTime) {
-				receivedMesssage.add(Static.Morse.WORD_END);
+				receivedMessage.add(Static.Morse.WORD_END);
 			} else if (deltaTime >= END_WORD_TIME && !isLampOn && !firstTime) {
-				receivedMesssage.add(Static.Morse.LETTER_END);
+				receivedMessage.add(Static.Morse.LETTER_END);
 			}
 
 			firstTime = false;
@@ -119,28 +119,30 @@ public class LightChatActivity extends Activity implements SensorEventListener {
 			lastEventTime = currentTime;
 
 			// falling edge
-		} else if (lastValue > THRESHOLD && value < THRESHOLD) {// intensity
+		}
+		else if (lastValue > THRESHOLD && value < THRESHOLD) {// intensity
 																// variation of
 																// -70
-
 			if (deltaTime >= LIMIT_TIME && isLampOn) {
-				receivedMesssage.add(Static.Morse.LONG);
+				receivedMessage.add(Static.Morse.LONG);
 			} else {
-				receivedMesssage.add(Static.Morse.SHORT);
+				receivedMessage.add(Static.Morse.SHORT);
 			}
 
 			isLampOn = false;
 			lastEventTime = currentTime;
-
 		}
+		
 		lastValue = value;
+		
+		
 		if (deltaTime >= 3800f) {
-			System.out.println(receivedMesssage);
-			
-			String decode = coder.decrypt(receivedMesssage);
-			messages.add(new ChatMessage(decode, false));
-			adapter.notifyDataSetChanged();			
-			receivedMesssage.clear();
+			if(receivedMessage.size() > 0) {	
+				System.out.println(receivedMessage);
+				messages.add(new ChatMessage(receivedMessage.toString(), false));
+				adapter.notifyDataSetChanged();			
+				receivedMessage.clear();
+			}
 		}
 	}
 
