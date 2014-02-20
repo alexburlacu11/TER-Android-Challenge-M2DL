@@ -67,7 +67,7 @@ public class LightSensorActivity extends Activity implements SensorEventListener
 	 
 	 private void detectMorseCode(float value){
 		 long currentTime = Calendar.getInstance().getTimeInMillis();
-		 float deltaTime = currentTime-lastEventTime;
+		 long deltaTime = currentTime-lastEventTime;
 		 
 		 // rising edge
 		 if( lastValue < THRESHOLD && value > THRESHOLD ){
