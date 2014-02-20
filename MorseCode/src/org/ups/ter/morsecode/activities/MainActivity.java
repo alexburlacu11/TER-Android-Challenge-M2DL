@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 	
 	public void toSound(View v){
 		Intent intent = new Intent(getApplicationContext(),
-				SoundActivity.class);
+				SendMorseActivity.class);
 		startActivity(intent);
 	}
 
