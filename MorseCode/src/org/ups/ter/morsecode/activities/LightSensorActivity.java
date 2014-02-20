@@ -26,7 +26,8 @@ public class LightSensorActivity extends Activity implements SensorEventListener
 	 private ArrayList<Static.Morse>	messsage = new ArrayList<Static.Morse>();
 	 
 	 private static final float			THRESHOLD = +1000f;
-	 private static final int			EMPTY_TIME = +1400;
+	 private static final int			END_LINE_TIME = +1300;
+	 private static final int			END_WORD_TIME = +400;
 	 private static final int			LIMIT_TIME = +400;
 	 
 	 
@@ -71,9 +72,12 @@ public class LightSensorActivity extends Activity implements SensorEventListener
 		 // rising edge
 		 if( lastValue < THRESHOLD && value > THRESHOLD ){
 
-			 if ( deltaTime >= EMPTY_TIME && !isLampOn && !firstTime){
+			 if ( deltaTime >= END_LINE_TIME && !isLampOn && !firstTime){
 				 messsage.add(Static.Morse.WORD_END);
+			 } else if ( deltaTime >= END_WORD_TIME && !isLampOn && !firstTime){
+				 messsage.add(Static.Morse.LETTER_END);
 			 } 
+			 
 			 firstTime = false;
 			 
 			 isLampOn = true;
