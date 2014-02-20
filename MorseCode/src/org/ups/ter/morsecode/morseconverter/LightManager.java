@@ -1,5 +1,7 @@
 package org.ups.ter.morsecode.morseconverter;
 
+import org.ups.ter.morsecode.Static;
+
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Handler;
@@ -15,10 +17,13 @@ public class LightManager {
 	Handler handler;
 	
 	boolean isCameraActive = false;
-
-	int[] lights = { 1, 2, 0, 2 };
-	
 	int currentLight = 0;
+
+	
+	// Temp sequence for testing
+	Static.Morse[] lights = { Static.Morse.SHORT, Static.Morse.LONG, Static.Morse.EMPTY, Static.Morse.LONG };
+	
+	
 
 	public LightManager() {
 		handler = new Handler();
@@ -29,7 +34,7 @@ public class LightManager {
 		nextLight(currentLight);
 	}
 
-	protected void ledon() {
+	protected void ledOn() {
 		cam = Camera.open();
 		Parameters p = cam.getParameters();
 		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
@@ -38,7 +43,7 @@ public class LightManager {
 		isCameraActive = true;
 	}
 
-	protected final void ledoff() {
+	protected final void ledOff() {
 		if(isCameraActive) {
 			cam.stopPreview();
 			cam.release();
@@ -47,12 +52,12 @@ public class LightManager {
 	}
 
 	protected void toggleShortLight() {
-		ledon();
+		ledOn();
 		handler.postDelayed(lighsOffRunnable, DOT_TIME);
 	}
 
 	protected void toggleLongLight() {
-		ledon();
+		ledOn();
 		handler.postDelayed(lighsOffRunnable, DASH_TIME);
 	}
 	
@@ -63,17 +68,17 @@ public class LightManager {
 	protected void nextLight(int i) {
 		if (i < lights.length) {
 			switch (lights[i]) {
-			case 0:
+			case EMPTY:
 				toggleSpace();
 				break;
-			case 1:
+			case SHORT:
 				toggleShortLight();
 				break;
-			case 2:
+			case LONG:
 				toggleLongLight();
 				break;
 			default:
-				ledoff();
+				ledOff();
 				break;
 			}
 		}
@@ -81,7 +86,8 @@ public class LightManager {
 
 	final Runnable lighsOffRunnable = new Runnable() {
 		public void run() {
-			ledoff();
+			ledOff();
+			// Delay between 2 elements = dot time
 			handler.postDelayed(nextLightRunnable, DOT_TIME);
 		}
 	};
