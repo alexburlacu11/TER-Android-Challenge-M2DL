@@ -17,9 +17,13 @@ public class MorseConverter {
 	public void sendLight(String data) {
 		lightManager.sendLight(data);
 	}
+	
+	public void sendMessage(String data) {
+		smsManager.sendSequence(data);
+	}
 
-	public void vibrate() {
-		smsManager.readSequence();
+	public void vibrate(String data) {
+		smsManager.readSequence(data);
 	}
 	
 }

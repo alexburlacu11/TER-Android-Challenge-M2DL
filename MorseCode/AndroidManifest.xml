@@ -4,6 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT"/>
@@ -34,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.ups.ter.morsecode.activities.ChatActivity"
+            android:name="org.ups.ter.morsecode.activities.LightChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>
         

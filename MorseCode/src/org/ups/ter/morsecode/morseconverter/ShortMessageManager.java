@@ -6,9 +6,12 @@ import org.ups.ter.morsecode.Static;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.telephony.SmsManager;
 
 public class ShortMessageManager {
 
+	private static String SMS_DEST = "+33614441619";
+	
 	private Handler handler;
 	private Vibrator vibrator;
 
@@ -24,7 +27,14 @@ public class ShortMessageManager {
 		handler = new Handler();
 	}
 	
-	public void readSequence() {
+	public void sendSequence(String data) {
+		if(null != data && !data.trim().equals("")) {
+			SmsManager smsManager =	SmsManager.getDefault();
+			smsManager.sendTextMessage(SMS_DEST, null, data, null, null);
+		}
+	}
+	
+	public void readSequence(String data) {
 		currentSign = 0;
 		nextSign(currentSign);
 	}

@@ -20,8 +20,7 @@ public class LightManager {
 
 	
 	// Temp sequence for testing
-	Static.Morse[] lights = { Static.Morse.SHORT, Static.Morse.LONG, Static.Morse.EMPTY, Static.Morse.LONG };
-	
+	Static.Morse[] lights = { Static.Morse.LONG, Static.Morse.LONG, Static.Morse.SHORT, Static.Morse.LONG, Static.Morse.EMPTY, Static.Morse.SHORT };
 	
 
 	public LightManager(Context context) {
